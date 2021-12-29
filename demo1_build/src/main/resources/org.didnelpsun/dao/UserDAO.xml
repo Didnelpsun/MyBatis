@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是DAO的地址-->
+<mapper namespace="org.didnelpsun.dao.UserDAO">
+    <!--配置查询所有，id为对应类的方法名，不能随便改-->
+    <!--resultType即持久层返回的数据应该封装成什么样的数据类-->
+    <select id="FindAllUsers" resultType="org.didnelpsun.entity.User">
+        select * from user
+    </select>
+</mapper>
