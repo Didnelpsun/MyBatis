@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> -->
 
 <!--mybatis的主配置文件-->
 <configuration>
@@ -24,6 +24,6 @@
     <!--指定映射配置文件的位置，映射配置文件指的是每个DAO独立的配置文件-->
     <mappers>
         <!--resource是相对于resources文件夹的资源地址-->
-        <mapper resource="org/didnelpsun/dao/UserDAO.xml"/>
+        <mapper resource="org.didnelpsun/dao/UserDAO.xml"/>
     </mappers>
 </configuration>

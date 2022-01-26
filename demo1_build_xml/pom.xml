@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.didnelpsun</groupId>
-  <artifactId>File-Manage-System</artifactId>
+  <artifactId>demo</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>File-Manage-System</name>
+  <name>demo</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
