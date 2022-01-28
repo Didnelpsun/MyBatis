@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是DAO的地址-->
+<mapper namespace="org.didnelpsun.dao.UserDAO">
+    <!--配置查询所有用户，id为对应类的方法名，不能随便改-->
+    <!--resultType即持久层返回的数据应该封装成什么样的数据类-->
+    <select id="selectAllUsers" resultType="org.didnelpsun.entity.User">
+        select * from user;
+    </select>
+    <!--插入用户-->
+    <insert id="insertUser" parameterType="org.didnelpsun.entity.User">
+        insert into user(name,sex,birthday,address) values (#{name},#{sex},#{birthday},#{address});
+    </insert>
+    <!--更新用户-->
+    <update id="updateUser" parameterType="org.didnelpsun.entity.User">
+        update user set name=#{name},sex=#{sex},birthday=#{birthday},address=#{address} where id=#{id};
+    </update>
+    <!--删除用户-->
+    <delete id="deleteUser" parameterType="Integer">
+        <!--由于只有一个参数，所以这个参数就是个占位符，叫什么都可以-->
+        delete from user where id=#{id};
+    </delete>
+    <!--查询一个用户-->
+    <select id="selectUser" parameterType="Integer" resultType="org.didnelpsun.entity.User">
+        select * from user where id=#{id};
+    </select>
+    <!--根据名称模糊查询用户-->
+    <select id="selectUsersByName" parameterType="String" resultType="org.didnelpsun.entity.User">
+        <!--这里不能使用百分号来模糊查询，必须在测试代码中写-->
+        <!--这种方式参数是以PreparedStatement占位参数的形式变成SQL语句，即进行预处理，所以更推荐-->
+        select * from user where name like #{name}
+        <!--如果是模糊查询也可以使用下面的方式，不过里面的参数固定为 ${value} -->
+        <!-- select * from user where name like '${value}'; -->
+        <!--这种方式参数是以Statement拼接字符串的形式变成SQL语句-->
+    </select>
+    <!--获取用户总数，即记录总条数-->
+    <select id="getUsersSum" resultType="Integer">
+        select count(id) from user;
+    </select>
+    <!--根据Query对象模糊查询用户-->
+    <select id="selectUsersByQuery" parameterType="org.didnelpsun.entity.Query" resultType="org.didnelpsun.entity.User">
+        select * from user where name like #{user.username};
+    </select>
+</mapper>
