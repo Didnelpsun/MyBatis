@@ -57,10 +57,10 @@ public class AppTest {
 
         // 5.使用代理对象执行方法
         // testInsertUser();
-        // testSelectAllUsers(userDAO);
-        // testDeleteUser(userDAO);
+        // testSelectAllUsers();
+        // testDeleteUser();
         // System.out.println("更新后：");
-        // testSelectAllUsers(userDAO);
+        // testSelectAllUsers();
         // testSelectUsersByName();
         testGetUsersSum();
     }

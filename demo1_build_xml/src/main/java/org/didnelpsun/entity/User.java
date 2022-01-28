@@ -4,17 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable{
-    private String id;
+    private Integer id;
     private String name;
     private Date birthday;
     private String sex;
     private String address;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,5 +53,23 @@ public class User implements Serializable{
     @Override
     public String toString(){
         return "User{" + "id=" + this.id + ",name=" + this.name + ",birthday=" + this.birthday + ",sex=" + this.sex + ",address=" + this.address + "}";
+    }
+
+    public User() {
+    }
+    
+    public User(Integer id, String name, String sex, Date birthday, String address){
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.address = address;
+    }
+    
+    public User(String name, String sex, Date birthday, String address){
+        this.name = name;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.address = address;
     }
 }

@@ -40,7 +40,7 @@ public class AppTest
         //4.使用SqlSession创建DAO接口的代理对象
         UserDAO userDAO = session.getMapper(UserDAO.class);
         //5.使用代理对象执行方法
-        List<User> users = userDAO.FindAllUsers();
+        List<User> users = userDAO.selectAllUsers();
         for(User user : users){
 //            System.out.println(user);
             System.out.println(user.toString());

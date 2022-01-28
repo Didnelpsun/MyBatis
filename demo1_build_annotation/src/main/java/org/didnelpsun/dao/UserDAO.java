@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserDAO {
     // 查询所有用户
     @Select("select * from user")
-    List<User> FindAllUsers();
+    List<User> selectAllUsers();
 }
