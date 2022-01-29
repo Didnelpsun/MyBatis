@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--mybatis的主配置文件-->
+<configuration>
+    <!--配置数据库连接的基本信息-->
+    <properties resource="jdbcConfig.properties"/>
+<!--    <properties url="file:///E:/Github/File-Manage-System/src/main/resources/jdbcConfig.properties" />-->
+    <typeAliases>
+<!--        <typeAlias type="org.didnelpsun.entity.User" alias="user" />-->
+        <package name="org.didnelpsun.entity"/>
+    </typeAliases>
+    <!--配置环境，default为默认值-->
+    <environments default="mysql">
+        <!--配置mysql的环境-->
+        <environment id="mysql">
+            <!--配置事务的类型-->
+            <transactionManager type="JDBC"/>
+            <!--配置连接池即数据源-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--指定映射配置文件的位置，映射配置文件指的是每个DAO独立的配置文件-->
+    <mappers>
+        <!--resource是相对于resources文件夹的资源地址-->
+<!--        <mapper resource="org/didnelpsun/dao/UserDAO.xml"/>-->
+        <package name="org.didnelpsun.dao"/>
+    </mappers>
+</configuration>
