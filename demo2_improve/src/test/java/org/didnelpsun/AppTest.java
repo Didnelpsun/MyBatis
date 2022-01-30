@@ -17,16 +17,10 @@ import org.didnelpsun.dao.UserDAO;
 import org.didnelpsun.entity.User;
 import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
     @Test
-    public void shouldAnswerWithTrue() throws IOException
+    public void Test() throws IOException
     {
         // 1.读取配置文件
         InputStream in = null;
@@ -53,6 +47,5 @@ public class AppTest
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        assertTrue( true );
     }
 }
