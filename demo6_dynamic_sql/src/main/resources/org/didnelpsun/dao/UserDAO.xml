@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是DAO的地址-->
+<mapper namespace="org.didnelpsun.dao.UserDAO">
+    <!--配置查询所有用户，id为对应类的方法名，不能随便改-->
+    <sql id="select">
+        select * from user
+    </sql>
+    <!--resultType即持久层返回的数据应该封装成什么样的数据类-->
+    <select id="selectAllUsers" resultType="org.didnelpsun.entity.User">
+        <include refid="select"/>
+    </select>
+    <!--查询一个用户-->
+    <select id="selectUser" parameterType="Integer" resultType="org.didnelpsun.entity.User">
+        <include refid="select"/> where id=#{id};
+    </select>
+    <!--根据名称模糊查询用户-->
+    <select id="selectUsersByName" parameterType="String" resultType="org.didnelpsun.entity.User">
+        <!--这里不能使用百分号来模糊查询，必须在测试代码中写-->
+        <!--这种方式参数是以PreparedStatement占位参数的形式变成SQL语句，即进行预处理，所以更推荐-->
+        <include refid="select"/> where name like #{name}
+        <!--如果是模糊查询也可以使用下面的方式，不过里面的参数固定为 ${value} -->
+        <!-- select * from user where name like '${value}'; -->
+        <!--这种方式参数是以Statement拼接字符串的形式变成SQL语句-->
+    </select>
+    <!--根据Query对象模糊查询用户-->
+    <select id="selectUsersByQuery" parameterType="org.didnelpsun.entity.Query" resultType="org.didnelpsun.entity.User">
+        <include refid="select"/> where name like #{user.username};
+    </select>
+    <select id="selectUsersByCondition" parameterType="org.didnelpsun.entity.User" resultType="org.didnelpsun.entity.User">
+        <!--注意SQL语句后不要加上分号，否则MyBatis会认为语句已经结束从而报错-->
+        <include refid="select"/>
+        <where>
+            <!--在进行并操作时不能使用&而只能使用and，因为&会被识别为java关键字-->
+            <if test="id!=null">
+            and id=#{id} 
+            </if>
+            <if test="name!=null">
+            and name like #{name} 
+            </if>
+            <if test="sex!=null">
+            and sex=#{sex} 
+            </if>
+            <if test="birthday!=null">
+            and birthday=#{birthday} 
+            </if>
+            <if test="address!=null">
+            and address like #{address} 
+            </if>
+        </where>
+    </select>
+    <!--根据Query中的id集合查询User-->
+    <select id="selectUsersInIDs" parameterType="org.didnelpsun.entity.Query" resultType="org.didnelpsun.entity.User">
+        <include refid="select"/>
+        <where>
+            <!--传入的是POJO对象，所以ids就是query.ids-->
+            <!--当ids不为空就开始查询-->
+            <if test="ids!=null and ids.size()>0">
+                <!--遍历对象为ids，开始语句为and id in(，最后以)结尾，遍历变量定义为id，用逗号分隔每个id-->
+                <foreach collection="ids" open="and id in (" close=")" item="id" separator=",">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>
