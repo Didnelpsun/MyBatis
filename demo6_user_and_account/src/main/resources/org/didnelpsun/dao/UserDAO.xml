@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是DAO的地址-->
+<mapper namespace="org.didnelpsun.dao.UserDAO">
+<!--    <select id="selectAllUsers" resultType="org.didnelpsun.entity.User">-->
+<!--        select * from user-->
+<!--    </select>-->
+    <!--由于需要联合查询，所以需要定义resultMap-->
+    <resultMap id="userMap" type="org.didnelpsun.entity.User">
+        <!--由于id名重复，所以这里起个别名-->
+        <id property="id" column="uid" />
+        <result property="name" column="name" />
+        <result property="birthday" column="birthday" />
+        <result property="sex" column="sex" />
+        <result property="address" column="address" />
+        <!--配置User对象中accounts集合的映射-->
+        <!--collection代表集合，propertys为User属性对象的名称，ofType为对象类型-->
+        <collection property="accounts" ofType="org.didnelpsun.entity.Account">
+            <id property="id" column="id" />
+            <result property="userid" column="userid" />
+            <result property="money" column="money" />
+        </collection>
+    </resultMap>
+    <!--使用左外连接，保存左边的数据-->
+    <!--由于要设置一个别名，所以不能使用*，而必须把所有要查询的属性名全部列出来-->
+    <select id="selectAllUsers" resultMap="userMap">
+        select user.id as uid, name, sex, birthday, address, account.id, account.userid, account.money from user left outer join account on user.id = account.userid;
+    </select>
+    <select id="selectUser" parameterType="Integer" resultType="org.didnelpsun.entity.User">
+        select * from user where id=#{id};
+    </select>
+</mapper>
