@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.didnelpsun.dao.RoleDAO">
+    <select id="selectAllRoles" resultType="org.didnelpsun.entity.Role">
+        select * from role
+    </select>
+    <resultMap id="roleMap" type="org.didnelpsun.entity.Role">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="description" column="description" />
+        <collection property="users" ofType="org.didnelpsun.entity.User">
+            <id property="id" column="uid" />
+            <result property="name" column="uname" />
+            <result property="sex" column="sex" />
+            <result property="birthday" column="birthday" />
+            <result property="address" column="address" />
+        </collection>
+    </resultMap>
+    <select id="selectAllRoleUsers"  resultMap="roleMap">
+        select role.*, user.id as uid, user.name as uname, user.sex, user.birthday, user.address from role left outer join user_role on role.id = user_role.roleid left outer join user on user.id = user_role.userid
+    </select>
+</mapper>

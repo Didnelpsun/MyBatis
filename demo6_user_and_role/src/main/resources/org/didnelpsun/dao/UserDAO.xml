@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是DAO的地址-->
+<mapper namespace="org.didnelpsun.dao.UserDAO">
+    <!--resultType即持久层返回的数据应该封装成什么样的数据类-->
+    <select id="selectAllUsers" resultType="org.didnelpsun.entity.User">
+        select * from user
+    </select>
+    <select id="selectUser" parameterType="Integer" resultType="org.didnelpsun.entity.User">
+        select * from user where id=#{id};
+    </select>
+    <resultMap id="userMap" type="org.didnelpsun.entity.User">
+        <id property="id" column="uid" />
+        <result property="name" column="uname" />
+        <result property="sex" column="sex" />
+        <result property="birthday" column="birthday" />
+        <result property="address" column="address" />
+        <collection property="roles" ofType="org.didnelpsun.entity.Role">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="description" column="description" />
+        </collection>
+    </resultMap>
+    <select id="selectAllUserRoles"  resultMap="userMap">
+        select user.id as uid, user.name as uname, user.sex, user.birthday, user.address, role.* from role right outer join user_role on role.id = user_role.roleid right outer join user on user.id = user_role.userid
+    </select>
+</mapper>
+
