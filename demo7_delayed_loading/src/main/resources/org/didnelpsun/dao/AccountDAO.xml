@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.didnelpsun.dao.AccountDAO">
+    <!--查询所有账户-->
+    <select id="selectAllAccounts" resultType="org.didnelpsun.entity.Account">
+        select * from account
+    </select>
+    <!--查询一个账户-->
+    <select id="selectAccount" parameterType="Integer" resultType="org.didnelpsun.entity.Account">
+        select * from account where id=#{id}
+    </select>
+    <!--查询所有账户与用户信息-->
+<!--    <select id="selectAllAccountUsers" resultType="org.didnelpsun.entity.AccountUser">-->
+<!--        select account.*, user.name, user.sex, user.birthday, user.address from account, user where user.id = account.userid;-->
+<!--    </select>-->
+    <resultMap id="accountUserMap" type="org.didnelpsun.entity.Account">
+        <id property="id" column="id"/>
+        <result property="userid" column="userid"/>
+        <result property="money" column="money" />
+        <!--一对一配置User的映射，使用association标签表示引用-->
+        <!--property是对应的表名，column是匹配字段名，javaType为封装成的类型-->
+        <association property="user" column="userid" javaType="org.didnelpsun.entity.User" select="org.didnelpsun.dao.UserDAO.selectUser"/>
+    </resultMap>
+    <select id="selectAllAccountUsers" resultMap="accountUserMap">
+        select * from account
+    </select>
+    <select id="selectAllAccountsByUserID" parameterType="Integer" resultType="org.didnelpsun.entity.Account">
+        select * from account where userid = #{userid}
+    </select>
+</mapper>
+
