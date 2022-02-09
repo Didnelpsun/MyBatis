@@ -8,7 +8,7 @@
     </select>
     <!--查询一个账户-->
     <select id="selectAccount" parameterType="Integer" resultType="org.didnelpsun.entity.Account">
-        select * from account where id=#{id};
+        select * from account where id=#{id}
     </select>
     <!--查询所有账户与用户信息-->
 <!--    <select id="selectAllAccountUsers" resultType="org.didnelpsun.entity.AccountUser">-->
@@ -31,6 +31,6 @@
         </association>
     </resultMap>
     <select id="selectAllAccountUsers" resultMap="accountUserMap">
-        select account.*, user.* from account, user where user.id = account.userid;
+        select account.*, user.* from account, user where user.id = account.userid
     </select>
 </mapper>
