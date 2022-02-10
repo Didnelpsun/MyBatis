@@ -1,3 +1,4 @@
+// Query.java
 package org.didnelpsun.entity;
 
 public class Query {

@@ -1,3 +1,4 @@
+// Configuration.jaba
 package org.didnelpsun.mybatis.cfg;
 
 import java.util.Map;

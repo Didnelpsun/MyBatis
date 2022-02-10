@@ -1,3 +1,4 @@
+// RoleDAO.java
 package org.didnelpsun.dao;
 
 import org.didnelpsun.entity.Role;

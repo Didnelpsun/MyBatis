@@ -1,3 +1,4 @@
+// SqlSession.java
 package org.didnelpsun.mybatis.sqlsession;
 
 // 自定义MyBatis中与数据库交互的核心接口，用于与DAO进行交互

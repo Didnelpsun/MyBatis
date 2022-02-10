@@ -1,3 +1,4 @@
+// Resources.java
 package org.didnelpsun.mybatis.io;
 
 import java.io.InputStream;

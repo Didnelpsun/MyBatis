@@ -1,3 +1,4 @@
+// Role.java
 package org.didnelpsun.entity;
 
 import java.io.Serializable;

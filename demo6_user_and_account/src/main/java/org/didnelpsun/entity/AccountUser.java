@@ -1,3 +1,4 @@
+// AccountUser.java
 package org.didnelpsun.entity;
 
 import java.util.Date;

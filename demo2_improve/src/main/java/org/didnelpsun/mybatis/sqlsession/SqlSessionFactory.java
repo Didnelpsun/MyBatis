@@ -1,3 +1,4 @@
+// SqlSessionFactory.java
 package org.didnelpsun.mybatis.sqlsession;
 
 // SqlSession工厂的接口
